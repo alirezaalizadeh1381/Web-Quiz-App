@@ -1,0 +1,51 @@
+﻿@model Question
+@{
+    ViewData["Title"] = "Create Question";
+    var testId = ViewContext.RouteData.Values["testId"] ?? Model.TestId;
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Create New Question</h1>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <form asp-action="CreateQuestion">
+                <input type="hidden" asp-for="TestId" value="@testId" />
+
+                <div class="form-group mb-3">
+                    <label asp-for="Content" class="form-label">Question Text</label>
+                    <textarea asp-for="Content" class="form-control" rows="3" placeholder="Enter the question text"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="CodeSnippet" class="form-label">Code Snippet (optional)</label>
+                    <textarea asp-for="CodeSnippet" class="form-control font-monospace"
+                              rows="5" placeholder="Enter code if applicable"></textarea>
+                    <span asp-validation-for="CodeSnippet" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="CorrectAnswer" class="form-label">Correct Answer</label>
+                    <textarea asp-for="CorrectAnswer" class="form-control" rows="3" placeholder="Enter the correct answer"></textarea>
+                    <span asp-validation-for="CorrectAnswer" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-controller="Admin" asp-action="Questions" asp-route-testId="@testId" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Questions
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Create Question
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

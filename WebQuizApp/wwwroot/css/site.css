@@ -1,0 +1,160 @@
+﻿/* Modern CSS Variables */
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --dark: #212529;
+    --light: #f8f9fa;
+    --success: #4cc9f0;
+    --danger: #f72585;
+    --warning: #f8961e;
+    --info: #4895ef;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fb;
+    color: var(--dark);
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: white !important;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--primary) !important;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 5rem 0;
+    margin-bottom: 3rem;
+    border-radius: 0 0 20px 20px;
+}
+
+    .hero h1 {
+        font-weight: 800;
+        font-size: 3.5rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+
+/* Stats Cards */
+.stats-container {
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+}
+
+.stat-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    border: none;
+}
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-card .card-body {
+        padding: 1.5rem;
+    }
+
+    .stat-card .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    .stat-card .stat-label {
+        color: #6c757d;
+        font-size: 1rem;
+    }
+
+/* Test Cards */
+.test-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    height: 100%;
+}
+
+    .test-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .test-card .card-img-top {
+        height: 160px;
+        object-fit: cover;
+        background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+    }
+
+    .test-card .card-body {
+        padding: 1.5rem;
+    }
+
+    .test-card .card-title {
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+    }
+
+    .test-card .badge {
+        font-weight: 500;
+        padding: 0.35em 0.65em;
+    }
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+}
+
+    .btn-primary:hover {
+        background-color: var(--secondary);
+        border-color: var(--secondary);
+    }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero {
+        padding: 3rem 0;
+    }
+
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+
+    .stats-container {
+        margin-top: 0;
+    }
+}
+
+pre {
+    white-space: pre-wrap; /* Wrap long lines */
+    word-break: break-all; /* Break long words */
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    overflow-x: auto;
+}

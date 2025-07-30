@@ -1,0 +1,93 @@
+﻿@model IEnumerable<UserTestResult>
+@{
+    var user = ViewBag.User as ApplicationUser;
+    ViewData["Title"] = $"{user.FirstName} {user.LastName}'s Profile";
+}
+
+<h1>@user.FirstName @user.LastName's Profile</h1>
+<p>Member since: @user.RegistrationDate?.ToString("d")??"Date Not Available"</p>
+
+<h2>Test History</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">You haven't taken any tests yet.</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Date</th>
+                <th>Score</th>
+                <th>Result</th>
+                <th>Best Score</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var testGroup in Model.GroupBy(r => r.TestId))
+            {
+                var bestScore = testGroup.Max(r => r.Score);
+                var firstResult = testGroup.OrderByDescending(r => r.AttemptDate).First();
+
+                <tr>
+                    <td>@firstResult.Test.Name</td>
+                    <td>@firstResult.AttemptDate.ToString("g")</td>
+                    <td>@firstResult.Score%</td>
+                    <td>
+                        @if (firstResult.Passed)
+                        {
+                            <span class="badge bg-success">Passed</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Failed</span>
+                        }
+                    </td>
+                    <td>
+                        <span class="fw-bold">@bestScore%</span>
+                        <span class="text-muted small">(@testGroup.Count() attempts)</span>
+                    </td>
+                    <td>
+                        <a asp-controller="Tests" asp-action="TakeTest"
+                           asp-route-id="@firstResult.TestId" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-arrow-repeat"></i> Retake
+                        </a>
+                        <button class="btn btn-sm btn-outline-info"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#history-@testGroup.Key">
+                            <i class="bi bi-clock-history"></i> History
+                        </button>
+                    </td>
+                </tr>
+
+                <tr class="collapse" id="history-@testGroup.Key">
+                    <td colspan="6">
+                        <h6>Attempt History:</h6>
+                        <table class="table table-sm">
+                            @foreach (var attempt in testGroup.OrderByDescending(r => r.AttemptDate))
+                            {
+                                <tr>
+                                    <td>@attempt.AttemptDate.ToString("g")</td>
+                                    <td>@attempt.Score%</td>
+                                    <td>
+                                        @if (attempt.Passed)
+                                        {
+                                            <span class="badge bg-success">Passed</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Failed</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Test>
+@{
+    ViewData["Title"] = "Manage Tests";
+}
+
+<h1>Manage Tests</h1>
+<p>
+    <a asp-action="CreateTest" class="btn btn-primary">Create New Test</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Passing Score</th>
+            <th>Active</th>
+            <th>Questions</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.PassingScore%</td>
+                <td>@(item.IsActive ? "Yes" : "No")</td>
+                <td>@item.Questions.Count</td>
+                <td>
+                    <a asp-action="EditTest" asp-route-id="@item.Id">Edit</a> |
+                    <a  asp-controller="Admin" asp-action="Questions" asp-route-testId="@item.Id">Questions</a> |
+                    <a asp-action="DeleteTest" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

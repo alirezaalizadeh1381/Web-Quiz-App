@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Test>
+@using System.Security.Claims
+@{
+    ViewData["Title"] = "Available Tests";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1 class="display-5 fw-bold">Available Tests</h1>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <a asp-controller="Profile" asp-action="Index" class="btn btn-outline-primary">
+                <i class="bi bi-person-circle"></i> My Profile
+            </a>
+        }
+    </div>
+
+    @if (User.Identity?.IsAuthenticated != true)
+    {
+        <div class="alert alert-info d-flex align-items-center" role="alert">
+            <i class="bi bi-info-circle-fill me-2"></i>
+            <div>
+                Please <a asp-area="Identity" asp-page="/Account/Login" class="alert-link">login</a>
+                or <a asp-area="Identity" asp-page="/Account/Register" class="alert-link">register</a>
+                to take tests and track your progress.
+            </div>
+        </div>
+    }
+
+    <div class="row g-4">
+        @foreach (var test in Model)
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="card test-card h-100 border-0 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">@test.Name</h5>
+                            <span class="badge bg-white text-primary">@test.Questions?.Count Qs</span>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <p class="card-text text-muted">@test.Description</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <span class="badge bg-light text-dark">
+                                    <i class="bi bi-check-circle"></i> @test.PassingScore% to pass
+                                </span>
+                            </div>
+                            @if (User.Identity?.IsAuthenticated == true)
+                            {
+                                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                                var hasCompleted = test.UserTestResults?.Any(utr => utr.UserId == userId) == true;
+
+                                @if (hasCompleted)
+                                {
+                                    <span class="badge bg-success">
+                                        <i class="bi bi-check-lg"></i> Completed
+                                    </span>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-transparent border-top-0">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <a asp-action="TakeTest" asp-route-id="@test.Id"
+                               class="btn btn-primary w-100">
+                                <i class="bi bi-pencil-square"></i> Take Test
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-area="Identity" asp-page="/Account/Login"
+                               asp-route-returnUrl="@Url.Action("TakeTest", "Tests", new { id = test.Id })"
+                               class="btn btn-primary w-100">
+                                <i class="bi bi-box-arrow-in-right"></i> Login to Start
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <i class="bi bi-collection text-muted" style="font-size: 5rem;"></i>
+            <h3 class="mt-3">No Tests Available</h3>
+            <p class="text-muted">Check back later for new challenges</p>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Admin" asp-action="CreateTest" class="btn btn-primary mt-3">
+                    <i class="bi bi-plus-circle"></i> Create New Test
+                </a>
+            }
+        </div>
+    }
+</div>
+
+@section Styles {
+    <style>
+        .test-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .test-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+        .card-header {
+            border-radius: 0.375rem 0.375rem 0 0 !important;
+        }
+    </style>
+}

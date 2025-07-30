@@ -1,0 +1,177 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login to Your Account";
+}
+
+<div class="login-container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-5">
+            <div class="login-card shadow-lg">
+                <div class="card-body p-4 p-lg-5">
+                    <div class="text-center mb-4">
+                        <h1 class="fw-bold mb-3">Welcome Back</h1>
+                        <p class="text-muted">Sign in to continue your learning journey</p>
+                    </div>
+
+                    <form id="account" method="post" class="mb-4">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="Email address" />
+                                <label asp-for="Input.Email" class="form-label">Email address</label>
+                            </div>
+                            <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" placeholder="Password" />
+                                <label asp-for="Input.Password" class="form-label">Password</label>
+                            </div>
+                            <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="Input.RememberMe" />
+                                <label class="form-check-label small" asp-for="Input.RememberMe">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a class="small text-primary" id="forgot-password" asp-page="./ForgotPassword">
+                                Forgot password?
+                            </a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 mb-3 fw-bold">
+                            <i class="bi bi-box-arrow-in-right me-2"></i> Sign In
+                        </button>
+                    </form>
+
+                    <div class="divider my-4">
+                        <span class="divider-text">or continue with</span>
+                    </div>
+
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="mb-4">
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-light border" name="provider" value="Google" title="Log in using your Google account">
+                                <i class="bi bi-google me-2 text-danger"></i> Sign in with Google
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="mb-2 small">
+                            Don't have an account?
+                            <a class="text-primary fw-medium" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">
+                                Sign up now
+                            </a>
+                        </p>
+                        <p class="mb-0 small">
+                            <a class="text-primary" id="resend-confirmation" asp-page="./ResendEmailConfirmation">
+                                Resend email confirmation
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8f9fa"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%23e9ecef" stroke-width="0.5"/></svg>');
+            background-size: 40px 40px;
+        }
+
+        .login-container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .login-card {
+            border-radius: 20px;
+            overflow: hidden;
+            border: none;
+            background: #fff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .login-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+            .divider::before,
+            .divider::after {
+                content: '';
+                flex: 1;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+        .divider-text {
+            padding: 0 1rem;
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        .btn-light {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+            .btn-light:hover {
+                background-color: #f8f9fa;
+                border-color: #ced4da;
+                transform: translateY(-2px);
+            }
+
+        .btn-primary {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background: linear-gradient(to right, #5d0fc7, #1c6afc);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3);
+            }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+        }
+
+        .small {
+            font-size: 0.85rem;
+        }
+    </style>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

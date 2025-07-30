@@ -1,0 +1,158 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Code Test - Improve Your Skills";
+}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container text-center">
+        <h1 class="display-4 mb-4">Test Your Programming Skills</h1>
+        <p class="lead mb-5">Challenge yourself with our interactive coding tests and track your progress</p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Tests" asp-action="Index" class="btn btn-light btn-lg px-4">
+                Start Testing Now <i class="bi bi-arrow-right"></i>
+            </a>
+        }
+        else
+        {
+            <div class="d-inline-block" data-bs-toggle="tooltip" title="Please login to access tests">
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-light btn-lg px-4">
+                    Start Testing Now <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Stats Section -->
+<div class="container stats-container">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card stat-card">
+                <div class="card-body text-center">
+                    <div class="stat-value text-primary">@Model.TotalTests</div>
+                    <div class="stat-label">Available Tests</div>
+                    <i class="bi bi-collection mt-2 text-primary" style="font-size: 2rem;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stat-card">
+                <div class="card-body text-center">
+                    <div class="stat-value text-success">@Model.TotalParticipants</div>
+                    <div class="stat-label">Participants</div>
+                    <i class="bi bi-people mt-2 text-success" style="font-size: 2rem;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stat-card">
+                <div class="card-body text-center">
+                    <div class="stat-value text-info">@Model.TotalQuestions</div>
+                    <div class="stat-label">Questions</div>
+                    <i class="bi bi-question-circle mt-2 text-info" style="font-size: 2rem;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Tests -->
+<section class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Featured Tests</h2>
+        <p class="text-muted">Choose from our collection of programming challenges</p>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var test in Model.FeaturedTests)
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="card test-card h-100">
+                    <div class="card-img-top">
+                        <i class="bi bi-code-square"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title">@test.Name</h5>
+                            <span class="badge bg-primary">@test.Questions.Count Questions</span>
+                        </div>
+                        <p class="card-text text-muted">@test.Description</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-muted small">Passing: @test.PassingScore%</span>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-controller="Tests" asp-action="TakeTest" asp-route-id="@test.Id"
+                                   class="btn btn-sm btn-outline-primary">
+                                    Take Test <i class="bi bi-arrow-right"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-area="Identity" asp-page="/Account/Login"
+                                   asp-route-returnUrl="@Url.Action("TakeTest", "Tests", new { id = test.Id })"
+                                   class="btn btn-sm btn-outline-primary">
+                                    Take Test <i class="bi bi-arrow-right"></i>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="text-center mt-5">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Tests" asp-action="Index" class="btn btn-primary px-4">
+                View All Tests <i class="bi bi-arrow-right"></i>
+            </a>
+        }
+        else
+        {
+            <a asp-area="Identity" asp-page="/Account/Login"
+               asp-route-returnUrl="@Url.Action("Index", "Tests")"
+               class="btn btn-primary px-4">
+                View All Tests <i class="bi bi-arrow-right"></i>
+            </a>
+        }
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="bg-light py-5">
+    <div class="container text-center py-4">
+        <h2 class="fw-bold mb-4">Ready to improve your skills?</h2>
+        <p class="lead mb-4">Join our community of developers and test your knowledge today</p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Tests" asp-action="Index" class="btn btn-primary btn-lg px-4">
+                Continue Learning <i class="bi bi-arrow-right"></i>
+            </a>
+        }
+        else
+        {
+            <div class="d-flex justify-content-center gap-3">
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-lg px-4">
+                    Sign Up Free
+                </a>
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-primary btn-lg px-4">
+                    Login
+                </a>
+            </div>
+        }
+    </div>
+</section>
+@section Scripts {
+    <script>
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+}
