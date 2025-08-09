@@ -1,0 +1,158 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|c:\\users\\loq\\source\\repos\\webquizapp\\webquizapp\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|solutionrelative:webquizapp\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|c:\\users\\loq\\source\\repos\\webquizapp\\webquizapp\\views\\test\\taketest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|solutionrelative:webquizapp\\views\\test\\taketest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|c:\\users\\loq\\source\\repos\\webquizapp\\webquizapp\\views\\test\\testresult.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|solutionrelative:webquizapp\\views\\test\\testresult.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|c:\\users\\loq\\source\\repos\\webquizapp\\webquizapp\\models\\useranswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|solutionrelative:webquizapp\\models\\useranswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|c:\\users\\loq\\source\\repos\\webquizapp\\webquizapp\\models\\usertestresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|solutionrelative:webquizapp\\models\\usertestresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|c:\\users\\loq\\source\\repos\\webquizapp\\webquizapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|solutionrelative:webquizapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|c:\\users\\loq\\source\\repos\\webquizapp\\webquizapp\\models\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|solutionrelative:webquizapp\\models\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|c:\\users\\loq\\source\\repos\\webquizapp\\webquizapp\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BC0F242-CA26-4C51-BF56-BEFE96DEABB6}|WebQuizApp\\WebQuizApp.csproj|solutionrelative:webquizapp\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TakeTest.cshtml",
+              "DocumentMoniker": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Views\\Test\\TakeTest.cshtml",
+              "RelativeDocumentMoniker": "WebQuizApp\\Views\\Test\\TakeTest.cshtml",
+              "ToolTip": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Views\\Test\\TakeTest.cshtml",
+              "RelativeToolTip": "WebQuizApp\\Views\\Test\\TakeTest.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAADgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-09T21:03:05.198Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TestResult.cshtml",
+              "DocumentMoniker": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Views\\Test\\TestResult.cshtml",
+              "RelativeDocumentMoniker": "WebQuizApp\\Views\\Test\\TestResult.cshtml",
+              "ToolTip": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Views\\Test\\TestResult.cshtml",
+              "RelativeToolTip": "WebQuizApp\\Views\\Test\\TestResult.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-09T20:51:53.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TestController.cs",
+              "DocumentMoniker": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Controllers\\TestController.cs",
+              "RelativeDocumentMoniker": "WebQuizApp\\Controllers\\TestController.cs",
+              "ToolTip": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Controllers\\TestController.cs",
+              "RelativeToolTip": "WebQuizApp\\Controllers\\TestController.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAkwGUAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T22:08:21.249Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserTestResult.cs",
+              "DocumentMoniker": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Models\\UserTestResult.cs",
+              "RelativeDocumentMoniker": "WebQuizApp\\Models\\UserTestResult.cs",
+              "ToolTip": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Models\\UserTestResult.cs",
+              "RelativeToolTip": "WebQuizApp\\Models\\UserTestResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T22:28:26.973Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserAnswer.cs",
+              "DocumentMoniker": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Models\\UserAnswer.cs",
+              "RelativeDocumentMoniker": "WebQuizApp\\Models\\UserAnswer.cs",
+              "ToolTip": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Models\\UserAnswer.cs",
+              "RelativeToolTip": "WebQuizApp\\Models\\UserAnswer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T22:41:58.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Test.cs",
+              "DocumentMoniker": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Models\\Test.cs",
+              "RelativeDocumentMoniker": "WebQuizApp\\Models\\Test.cs",
+              "ToolTip": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Models\\Test.cs",
+              "RelativeToolTip": "WebQuizApp\\Models\\Test.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAIA0wBMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T23:11:03.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "WebQuizApp\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "WebQuizApp\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIA/wB8AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T22:51:18.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Program.cs",
+              "RelativeDocumentMoniker": "WebQuizApp\\Program.cs",
+              "ToolTip": "C:\\Users\\LOQ\\source\\repos\\WebQuizApp\\WebQuizApp\\Program.cs",
+              "RelativeToolTip": "WebQuizApp\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACIAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T22:58:04.566Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

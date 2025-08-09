@@ -39,6 +39,7 @@ namespace WebQuizApp.Controllers
             {
                 await _unitOfWork.Tests.AddAsync(test);
                 await _unitOfWork.CompleteAsync();
+                TempData["success"] = "Test created successfully!";
                 return RedirectToAction("Tests");
             }
             return View(test);
@@ -61,6 +62,7 @@ namespace WebQuizApp.Controllers
             {
                 _unitOfWork.Tests.Update(test);
                 await _unitOfWork.CompleteAsync();
+                TempData["success"] = "Test edited successfully!";
                 return RedirectToAction("Tests");
             }
             return View(test);
@@ -83,6 +85,7 @@ namespace WebQuizApp.Controllers
             {
                 _unitOfWork.Tests.Remove(test);
                 await _unitOfWork.CompleteAsync();
+                TempData["success"] = "Test deleted successfully!";
             }
             return RedirectToAction("Tests");
         }

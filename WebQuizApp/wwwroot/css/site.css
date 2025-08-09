@@ -158,3 +158,28 @@ pre {
     border-radius: 0.25rem;
     overflow-x: auto;
 }
+
+/* Question cards */
+.card.border-success {
+    border-width: 2px;
+}
+
+.card.border-danger {
+    border-width: 2px;
+}
+
+/* Answer boxes */
+pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.alert-danger {
+    background-color: #fff5f5;
+    border-color: #f5c2c7;
+}
+
+.alert-success {
+    background-color: #f0fff4;
+    border-color: #badbcc;
+}

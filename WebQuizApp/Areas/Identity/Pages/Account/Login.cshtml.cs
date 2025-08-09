@@ -92,19 +92,32 @@ namespace WebQuizApp.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl ??= Url.Content("~/");
+            // Prevent recursive logout URL
+            if (returnUrl?.Contains("Logout") == true)
+            {
+                returnUrl = "/";
+            }
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            ReturnUrl = returnUrl;
+            ReturnUrl = returnUrl ?? Url.Content("~/Tests");
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/Tests/Index");
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                returnUrl = Url.Content("~/");
+            }
+
+            // Prevent recursive logout URL
+            if (returnUrl.Contains("Logout"))
+            {
+                returnUrl = "/Tests";
+            }
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 

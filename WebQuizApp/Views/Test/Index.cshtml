@@ -1,5 +1,6 @@
-﻿@model IEnumerable<Test>
+﻿@model List<WebQuizApp.ViewModels.TestWithStatusViewModel>
 @using System.Security.Claims
+@using WebQuizApp.Controllers
 @{
     ViewData["Title"] = "Available Tests";
 }
@@ -29,65 +30,50 @@
     }
 
     <div class="row g-4">
-        @foreach (var test in Model)
+        @foreach (var item in Model)
         {
-            <div class="col-lg-4 col-md-6">
-                <div class="card test-card h-100 border-0 shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">@test.Name</h5>
-                            <span class="badge bg-white text-primary">@test.Questions?.Count Qs</span>
-                        </div>
-                    </div>
-
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm">
                     <div class="card-body">
-                        <div class="mb-3">
-                            <p class="card-text text-muted">@test.Description</p>
-                        </div>
+                        <h5 class="card-title">@item.Test.Name</h5>
+                        <p class="card-text text-muted">@item.Test.Description</p>
 
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <span class="badge bg-light text-dark">
-                                    <i class="bi bi-check-circle"></i> @test.PassingScore% to pass
-                                </span>
-                            </div>
-                            @if (User.Identity?.IsAuthenticated == true)
-                            {
-                                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                                var hasCompleted = test.UserTestResults?.Any(utr => utr.UserId == userId) == true;
-
-                                @if (hasCompleted)
-                                {
-                                    <span class="badge bg-success">
-                                        <i class="bi bi-check-lg"></i> Completed
-                                    </span>
-                                }
-                            }
-                        </div>
-                    </div>
-
-                    <div class="card-footer bg-transparent border-top-0">
-                        @if (User.Identity?.IsAuthenticated == true)
+                        <!-- Status indicator -->
+                        @if (item.Passed.HasValue)
                         {
-                            <a asp-action="TakeTest" asp-route-id="@test.Id"
-                               class="btn btn-primary w-100">
-                                <i class="bi bi-pencil-square"></i> Take Test
-                            </a>
+                            <div class="d-flex align-items-center mb-3">
+                                @if (item.Passed.Value)
+                                {
+                                    <span class="badge bg-success me-2">
+                                        <i class="bi bi-check-circle"></i> Passed
+                                    </span>
+                                    <span class="text-success fw-bold">@item.Score%</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger me-2">
+                                        <i class="bi bi-x-circle"></i> Failed
+                                    </span>
+                                    <span class="text-danger fw-bold">@item.Score%</span>
+                                }
+                            </div>
                         }
                         else
                         {
-                            <a asp-area="Identity" asp-page="/Account/Login"
-                               asp-route-returnUrl="@Url.Action("TakeTest", "Tests", new { id = test.Id })"
-                               class="btn btn-primary w-100">
-                                <i class="bi bi-box-arrow-in-right"></i> Login to Start
-                            </a>
+                            <span class="badge bg-secondary">
+                                <i class="bi bi-question-circle"></i> Not Attempted
+                            </span>
                         }
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <a asp-action="TakeTest" asp-route-id="@item.Test.Id"
+                           class="btn btn-outline-primary w-100">
+                            @(item.Passed.HasValue ? "Retake Test" : "Take Test")
+                        </a>
                     </div>
                 </div>
             </div>
         }
-    </div>
-
     @if (!Model.Any())
     {
         <div class="text-center py-5">

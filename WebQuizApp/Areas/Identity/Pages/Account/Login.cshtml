@@ -1,177 +1,358 @@
 ﻿@page
 @model LoginModel
 @{
-    ViewData["Title"] = "Login to Your Account";
+    ViewData["Title"] = "Login to CodeTest";
+    Layout = null; // We'll handle layout inline for simplicity
 }
 
-<div class="login-container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6 col-xl-5">
-            <div class="login-card shadow-lg">
-                <div class="card-body p-4 p-lg-5">
-                    <div class="text-center mb-4">
-                        <h1 class="fw-bold mb-3">Welcome Back</h1>
-                        <p class="text-muted">Sign in to continue your learning journey</p>
-                    </div>
-
-                    <form id="account" method="post" class="mb-4">
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="Email address" />
-                                <label asp-for="Input.Email" class="form-label">Email address</label>
-                            </div>
-                            <span asp-validation-for="Input.Email" class="text-danger small"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" placeholder="Password" />
-                                <label asp-for="Input.Password" class="form-label">Password</label>
-                            </div>
-                            <span asp-validation-for="Input.Password" class="text-danger small"></span>
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <div class="form-check">
-                                <input class="form-check-input" asp-for="Input.RememberMe" />
-                                <label class="form-check-label small" asp-for="Input.RememberMe">
-                                    Remember me
-                                </label>
-                            </div>
-                            <a class="small text-primary" id="forgot-password" asp-page="./ForgotPassword">
-                                Forgot password?
-                            </a>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100 py-2 mb-3 fw-bold">
-                            <i class="bi bi-box-arrow-in-right me-2"></i> Sign In
-                        </button>
-                    </form>
-
-                    <div class="divider my-4">
-                        <span class="divider-text">or continue with</span>
-                    </div>
-
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="mb-4">
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-light border" name="provider" value="Google" title="Log in using your Google account">
-                                <i class="bi bi-google me-2 text-danger"></i> Sign in with Google
-                            </button>
-                        </div>
-                    </form>
-
-                    <div class="text-center mt-4">
-                        <p class="mb-2 small">
-                            Don't have an account?
-                            <a class="text-primary fw-medium" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">
-                                Sign up now
-                            </a>
-                        </p>
-                        <p class="mb-0 small">
-                            <a class="text-primary" id="resend-confirmation" asp-page="./ResendEmailConfirmation">
-                                Resend email confirmation
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-@section Styles {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3a0ca3;
-            --light-bg: #f8f9fa;
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --primary: #4361ee;
+            --dark: #1e2a78;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --code-bg: #0d1117;
+            --success: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: var(--light);
             min-height: 100vh;
             display: flex;
+            justify-content: center;
             align-items: center;
-            padding: 1rem;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8f9fa"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%23e9ecef" stroke-width="0.5"/></svg>');
-            background-size: 40px 40px;
+            padding: 20px;
         }
 
         .login-container {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             width: 100%;
-            margin: 0 auto;
-        }
-
-        .login-card {
-            border-radius: 20px;
+            max-width: 420px;
             overflow: hidden;
-            border: none;
-            background: #fff;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(66, 86, 178, 0.3);
         }
 
-            .login-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        .login-header {
+            background: var(--code-bg);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .logo-icon {
+            background: var(--primary);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, #4361ee, #3a0ca3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .tagline {
+            color: #94a3b8;
+            font-size: 15px;
+            margin-top: 8px;
+        }
+
+        .login-form {
+            padding: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+            .input-field:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            }
+
+            .input-field::placeholder {
+                color: #64748b;
+            }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+            .forgot-password:hover {
+                color: #3a86ff;
+                text-decoration: underline;
+            }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 20px;
+        }
+
+            .login-button:hover {
+                background: #3a56e4;
             }
 
         .divider {
-            display: flex;
-            align-items: center;
             text-align: center;
+            position: relative;
+            margin: 20px 0;
+            color: #64748b;
         }
 
             .divider::before,
             .divider::after {
-                content: '';
-                flex: 1;
-                border-bottom: 1px solid #dee2e6;
+                content: "";
+                position: absolute;
+                top: 50%;
+                width: 42%;
+                height: 1px;
+                background: linear-gradient(to right, transparent, #334155, transparent);
             }
 
-        .divider-text {
-            padding: 0 1rem;
-            color: #6c757d;
-            font-size: 0.85rem;
-        }
-
-        .btn-light {
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            transition: all 0.3s ease;
-        }
-
-            .btn-light:hover {
-                background-color: #f8f9fa;
-                border-color: #ced4da;
-                transform: translateY(-2px);
+            .divider::before {
+                left: 0;
             }
 
-        .btn-primary {
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-            .btn-primary:hover {
-                background: linear-gradient(to right, #5d0fc7, #1c6afc);
-                transform: translateY(-2px);
-                box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3);
+            .divider::after {
+                right: 0;
             }
 
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+        .google-button {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            color: #4285f4;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .small {
-            font-size: 0.85rem;
+            .google-button:hover {
+                background: #f8fafc;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+            .signup-link a {
+                color: var(--primary);
+                text-decoration: none;
+                font-weight: 500;
+                margin-left: 5px;
+            }
+
+                .signup-link a:hover {
+                    text-decoration: underline;
+                }
+
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid #475569;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+
+            input[type="checkbox"]:checked {
+                background: var(--primary);
+                border-color: var(--primary);
+            }
+
+                input[type="checkbox"]:checked::after {
+                    content: "✓";
+                    position: absolute;
+                    color: white;
+                    font-size: 12px;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+        @@media (max-width: 480px) {
+            .login-container {
+                border-radius: 12px;
+            }
+
+            .login-header {
+                padding: 25px 15px;
+            }
+
+            .login-form {
+                padding: 25px 20px;
+            }
         }
     </style>
-}
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h1>CodeTest</h1>
+            </div>
+            <p class="tagline">Test your programming skills. Level up your career.</p>
+        </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+        <form class="login-form" method="post">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="input-field" placeholder="coder@example.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" class="input-field" placeholder="••••••••" required>
+                    <span class="toggle-password" id="togglePassword">
+                        <i class="far fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-button">Sign In</button>
+
+            <div class="divider">or continue with</div>
+
+            <button type="button" class="google-button">
+                <i class="fab fa-google" style="color: #4285F4;"></i>
+                Sign in with Google
+            </button>
+
+            <div class="signup-link">
+                Don't have an account? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register now</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordField = document.getElementById('password');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+
+            this.innerHTML = type === 'password'
+                ? '<i class="far fa-eye"></i>'
+                : '<i class="far fa-eye-slash"></i>';
+        });
+    </script>
+</body>
+</html>

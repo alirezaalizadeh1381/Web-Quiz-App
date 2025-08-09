@@ -99,7 +99,7 @@ namespace WebQuizApp.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnGetCallbackAsync(string returnUrl = null, string remoteError = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Content("~/Tests/Index");
 
             if (remoteError != null)
             {

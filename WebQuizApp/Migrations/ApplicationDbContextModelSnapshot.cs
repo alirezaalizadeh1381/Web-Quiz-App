@@ -278,6 +278,9 @@ namespace WebQuizApp.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsCaseSensitive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -289,6 +292,30 @@ namespace WebQuizApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tests");
+                });
+
+            modelBuilder.Entity("WebQuizApp.Models.UserAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ResultId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResultId");
+
+                    b.ToTable("UserAnswers");
                 });
 
             modelBuilder.Entity("WebQuizApp.Models.UserTestResult", b =>
@@ -385,6 +412,17 @@ namespace WebQuizApp.Migrations
                     b.Navigation("Test");
                 });
 
+            modelBuilder.Entity("WebQuizApp.Models.UserAnswer", b =>
+                {
+                    b.HasOne("WebQuizApp.Models.UserTestResult", "TestResult")
+                        .WithMany("UserAnswers")
+                        .HasForeignKey("ResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TestResult");
+                });
+
             modelBuilder.Entity("WebQuizApp.Models.UserTestResult", b =>
                 {
                     b.HasOne("WebQuizApp.Models.Test", "Test")
@@ -407,6 +445,11 @@ namespace WebQuizApp.Migrations
                     b.Navigation("Questions");
 
                     b.Navigation("UserTestResults");
+                });
+
+            modelBuilder.Entity("WebQuizApp.Models.UserTestResult", b =>
+                {
+                    b.Navigation("UserAnswers");
                 });
 #pragma warning restore 612, 618
         }

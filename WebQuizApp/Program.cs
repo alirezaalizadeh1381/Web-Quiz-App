@@ -1,9 +1,11 @@
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Security.Principal;
 using WebQuizApp.Data;
 using WebQuizApp.Models;
 using WebQuizApp.Repositories;
@@ -18,6 +20,7 @@ builder.Services.AddControllersWithViews();
 // Add the Unit of work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+// Add role manager and user manager 
 builder.Services.AddScoped<RoleManager<IdentityRole>>();
 builder.Services.AddScoped<UserManager<ApplicationUser>>();
 
@@ -40,8 +43,6 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 // Handle the Email sevice
 builder.Services.AddTransient<IEmailSender, DummyEmailSender>();
 
-// Add other login options like Google
-builder.Services.AddAuthentication();
 
 
 // Add other login options like Google
@@ -52,15 +53,15 @@ builder.Services.AddAuthentication()
         options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
     });
 
-builder.Services.ConfigureApplicationCookie(options =>
+// Explicitly configure Cookie Authentication options to set LoginPath correctly
+builder.Services.Configure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options =>
 {
-    options.LoginPath = "/Identity/Account/Login";
-    options.LoginPath = "/Identity/Account/Logout";
-    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-    options.ReturnUrlParameter = "returnUrl";
+    options.LoginPath = "/Identity/Account/Login";  // This should be Login, NOT Logout!
+    options.LogoutPath = "/Identity/Account/Logout";  // Correct for logout.
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";  // Optional, for forbidden access.
+    options.Cookie.SameSite = SameSiteMode.Lax;  // Helps with cookie issues in modern browsers.
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;  // Use 'SameAsRequest' if testing on HTTP localhost.
 });
-
-
 
 builder.Services.AddRazorPages();
 
@@ -105,9 +106,22 @@ app.UseRouting();
 
 app.MapRazorPages();
 
-app.UseAuthorization();
+app.UseAuthentication();
 
 app.UseAuthorization();
+
+
+
+// Add this middleware to handle unauthorized access
+app.Use(async (context, next) =>
+{
+    await next();
+
+    if (context.Response.StatusCode == 401)
+    {
+        context.Response.Redirect($"/Identity/Account/Login?returnUrl={context.Request.Path}");
+    }
+});
 
 app.MapStaticAssets();
 
@@ -126,6 +140,8 @@ app.MapControllerRoute(
     pattern: "Tests/{action=Index}/{id}",
     defaults: new { controller = "Tests" }
     );
+
+
 
 
 app.Run();

@@ -18,5 +18,8 @@ namespace WebQuizApp.Models
 
         public List<Question>? Questions { get; set; }
         public List<UserTestResult>? UserTestResults { get; set; }
+
+        // For case sensitive in order to prevent false response
+        public bool IsCaseSensitive { get; set; }
     }
 }

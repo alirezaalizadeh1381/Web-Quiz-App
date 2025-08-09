@@ -6,7 +6,7 @@
 <h1>@Model.Name</h1>
 <p class="lead">@Model.Description</p>
 
-<form asp-action="SubmitTest" method="post">
+<form asp-action="SubmitTest" method="post" id="testForm">
     <input type="hidden" name="testId" value="@Model.Id" />
 
     @for (int i = 0; i < Model.Questions.Count; i++)
@@ -35,8 +35,11 @@
 
                 <div class="form-group">
                     <label class="form-label">Your Answer:</label>
-                    <textarea name="answers[@question.Id]"
-                          class="form-control" rows="4"
+                    <textarea id="answer-@question.Id"
+                        name="answers[@question.Id]"
+                          class="form-control" 
+                          rows="4"
+                          maxlength="500"
                           placeholder="Type your answer here..."></textarea>
                 </div>
             </div>
@@ -49,3 +52,15 @@
         </button>
     </div>
 </form>
+@section Scripts {
+    <script>
+        const form = document.getElementById('testForm');
+        form.addEventListener('submit', function (event) {
+            if (!confirm('Are you sure you want to submit the test?')) {
+                event.preventDefault();
+                return;
+            }
+            form.querySelector('button[type="submit"]').disabled = true;
+        });
+    </script>
+}

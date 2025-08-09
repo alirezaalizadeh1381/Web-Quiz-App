@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebQuizApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d17115fd9025667b15f839d06da4ca307e2034a")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebQuizApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebQuizApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
